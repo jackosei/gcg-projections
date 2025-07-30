@@ -1,0 +1,9 @@
+Parameter,Value,Unit,Description
+Initial_Investment,800000,GHS,Total startup investment
+Monthly_Depreciation,5000,GHS,Monthly equipment depreciation
+Day_Old_Chick_Cost,15,GHS,Cost per day-old chick
+Spent_Layer_Sale_Price,40,GHS,Sale price per spent layer
+Feed_Cost_Per_Bag,400,GHS,Cost per 50kg feed bag
+Labor_Cost,15000,GHS,Monthly labor cost
+Medication_Cost,1000,GHS,Monthly medication/vet cost
+Mortality_Rate,0.01,%,Monthly mortality rate (1%) 

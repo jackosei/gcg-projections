@@ -1,0 +1,34 @@
+# This would be an Excel file with multiple sheets:
+
+## Sheet 1: "Flock_Configuration"
+| Flock_ID | Flock_Name | Initial_Count | Hatch_Date | Peak_Trays | Sale_Age_Weeks | Notes |
+|----------|------------|---------------|------------|------------|----------------|-------|
+| HB1 | Brown Layers 1 | 4500 | 2025-01-08 | 120 | 104 | First flock |
+| HB2 | Brown Layers 2 | 3000 | 2025-04-03 | 80 | 104 | Second flock |
+| HB3 | New Flock | 5000 | 2025-07-15 | 150 | 104 | Add your new flock here |
+
+## Sheet 2: "Financial_Parameters"
+| Parameter | Value | Unit | Description |
+|-----------|-------|------|-------------|
+| Initial_Investment | 800000 | GHS | Total startup investment |
+| Monthly_Depreciation | 5000 | GHS | Monthly equipment depreciation |
+| Day_Old_Chick_Cost | 15 | GHS | Cost per day-old chick |
+| Spent_Layer_Sale_Price | 40 | GHS | Sale price per spent layer |
+| Feed_Cost_Per_Bag | 400 | GHS | Cost per 50kg feed bag |
+| Labor_Cost | 15000 | GHS | Monthly labor cost |
+| Medication_Cost | 1000 | GHS | Monthly medication/vet cost |
+| Mortality_Rate | 0.01 | % | Monthly mortality rate (1%) |
+
+## Sheet 3: "Egg_Pricing"
+| Week_Start | Week_End | Price_Per_Tray | Egg_Size |
+|------------|----------|----------------|----------|
+| 16 | 20 | 30 | Small |
+| 21 | 999 | 50 | Standard |
+
+## Sheet 4: "Feed_Consumption"
+| Week | Grams_Per_Bird_Per_Day | Notes |
+|------|------------------------|-------|
+| 1 | 11 | Week 1 feed consumption |
+| 2 | 17 | Week 2 feed consumption |
+| ... | ... | ... |
+| 20 | 93 | Standard rate from week 20+ | 
