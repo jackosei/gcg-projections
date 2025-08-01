@@ -117,24 +117,29 @@ class TableManager {
      * Setup table controls (pagination and sorting)
      */
     setupTableControls() {
-        // Records per page selectors
+        console.log('Setting up table controls...');
+        
+        // Records per page controls
         document.getElementById('salesRecordsPerPage').onchange = () => {
-            this.salesPerPage = this.salesRecordsPerPage.value === 'all' ? Infinity : parseInt(this.salesRecordsPerPage.value, 10);
+            this.salesPerPage = document.getElementById('salesRecordsPerPage').value === 'all' ? Infinity : parseInt(document.getElementById('salesRecordsPerPage').value);
             this.salesPage = 1;
             this.populateSalesTable(window.currentFilteredSales || []);
+            console.log('Sales records per page changed to:', this.salesPerPage);
         };
 
         document.getElementById('transactionsRecordsPerPage').onchange = () => {
-            this.transactionsPerPage = this.transactionsRecordsPerPage.value === 'all' ? Infinity : parseInt(this.transactionsRecordsPerPage.value, 10);
+            this.transactionsPerPage = document.getElementById('transactionsRecordsPerPage').value === 'all' ? Infinity : parseInt(document.getElementById('transactionsRecordsPerPage').value);
             this.transactionsPage = 1;
             this.populateTransactionsTable(window.currentFilteredTransactions || []);
+            console.log('Transactions records per page changed to:', this.transactionsPerPage);
         };
 
-        // Prev/Next buttons
+        // Pagination controls
         document.getElementById('salesPrevPage').onclick = () => {
             if (this.salesPage > 1) { 
                 this.salesPage--; 
                 this.populateSalesTable(window.currentFilteredSales || []); 
+                console.log('Sales page changed to:', this.salesPage);
             }
         };
 
@@ -143,6 +148,7 @@ class TableManager {
             if (this.salesPage < Math.ceil(total / this.salesPerPage)) { 
                 this.salesPage++; 
                 this.populateSalesTable(window.currentFilteredSales || []); 
+                console.log('Sales page changed to:', this.salesPage);
             }
         };
 
@@ -150,6 +156,7 @@ class TableManager {
             if (this.transactionsPage > 1) { 
                 this.transactionsPage--; 
                 this.populateTransactionsTable(window.currentFilteredTransactions || []); 
+                console.log('Transactions page changed to:', this.transactionsPage);
             }
         };
 
@@ -158,14 +165,19 @@ class TableManager {
             if (this.transactionsPage < Math.ceil(total / this.transactionsPerPage)) { 
                 this.transactionsPage++; 
                 this.populateTransactionsTable(window.currentFilteredTransactions || []); 
+                console.log('Transactions page changed to:', this.transactionsPage);
             }
         };
 
         // Sorting
-        document.querySelectorAll('.sortable-header').forEach(header => {
+        const sortableHeaders = document.querySelectorAll('.sortable-header');
+        console.log('Found sortable headers:', sortableHeaders.length);
+        
+        sortableHeaders.forEach(header => {
             header.onclick = () => {
                 const key = header.getAttribute('data-sort');
                 const table = header.getAttribute('data-table');
+                console.log('Sorting clicked:', key, 'for table:', table);
                 
                 if (table === 'sales') {
                     if (this.salesSort.key === key) {
@@ -194,21 +206,29 @@ class TableManager {
      * Setup tab switching
      */
     setupTabSwitching() {
+        console.log('Setting up tab switching...');
         const tabButtons = document.querySelectorAll('#dataTabs .tab-button');
         const salesTabPane = document.getElementById('salesTab');
         const expensesTabPane = document.getElementById('expensesTab');
 
+        console.log('Found tab buttons:', tabButtons.length);
+        console.log('Sales tab pane:', salesTabPane);
+        console.log('Expenses tab pane:', expensesTabPane);
+
         tabButtons.forEach(btn => {
             btn.addEventListener('click', () => {
+                console.log('Tab clicked:', btn.dataset.tab);
                 tabButtons.forEach(b => b.classList.remove('active', 'border-blue-500', 'font-semibold'));
                 btn.classList.add('active', 'border-blue-500', 'font-semibold');
                 
                 if (btn.dataset.tab === 'sales') {
                     salesTabPane.classList.remove('hidden');
                     expensesTabPane.classList.add('hidden');
+                    console.log('Switched to sales tab');
                 } else {
                     salesTabPane.classList.add('hidden');
                     expensesTabPane.classList.remove('hidden');
+                    console.log('Switched to expenses tab');
                 }
             });
         });

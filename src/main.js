@@ -79,6 +79,9 @@ class FinancialDashboard {
             this.summaryComponent
         );
         
+        // Initialize components
+        this.tablesComponent.initialize();
+        
         // Make components globally available
         window.filterComponent = this.filterComponent;
         window.fileUpload = this.fileUpload;
