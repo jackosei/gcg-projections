@@ -3,518 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Goldcoast Farms Financial Projection (Full Lifecycle)</title>
+    <title>Goldcoast Farms - Financial Tools</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
         }
-        .tab-button.active {
-            border-bottom-color: #2563eb;
-            color: #2563eb;
-            font-weight: 600;
+        .tool-card {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
         }
-        .tab-button {
-            border-bottom: 2px solid transparent;
+        .tool-card:hover {
+            transform: translateY(-4px);
+            border-color: #2563eb;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
-        .table-responsive {
-            display: block;
-            width: 100%;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-        th, td {
-            white-space: nowrap;
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
+    <div class="min-h-screen gradient-bg">
+        <div class="container mx-auto px-4 py-8">
+            <!-- Header -->
+            <header class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
+                    Goldcoast Farms
+                </h1>
+                <p class="text-xl text-white/90 mb-2">Financial Management Tools</p>
+                <p class="text-white/80">Choose the tool that best fits your needs</p>
+            </header>
 
-    <div class="container mx-auto p-4 md:p-8">
-        <header class="text-center mb-8">
-            <h1 class="text-3xl md:text-4xl font-bold text-gray-900">Goldcoast Farms Financial Projection</h1>
-            <p class="text-md text-gray-600 mt-2">An interactive full lifecycle forecast for HB1 and HB2 Flocks.</p>
-        </header>
+            <!-- Tools Selection -->
+            <div class="max-w-6xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    
+                    <!-- Enhanced Financial Dashboard -->
+                    <div class="tool-card bg-white rounded-xl shadow-lg overflow-hidden">
+                        <div class="p-8">
+                            <div class="flex items-center mb-6">
+                                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl font-bold text-gray-900">Enhanced Financial Dashboard</h2>
+                                    <p class="text-blue-600 font-medium">Real-time Analytics</p>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-4 mb-8">
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-900">Upload CSV Files</h3>
+                                        <p class="text-sm text-gray-600">Import your Egg Sales Tracker and Transactions data</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-900">Interactive Charts</h3>
+                                        <p class="text-sm text-gray-600">Visualize revenue, expenses, and profit trends</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-900">Advanced Filtering</h3>
+                                        <p class="text-sm text-gray-600">Filter by date range, customer, payment status, and method</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-900">Data Export</h3>
+                                        <p class="text-sm text-gray-600">Export filtered data and charts as CSV/PNG</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <a href="actuals.html" class="block w-full bg-blue-600 text-white text-center py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition duration-300">
+                                Launch Dashboard
+                            </a>
+                        </div>
+                    </div>
 
-        <!-- Tabs Navigation -->
-        <div class="mb-6 border-b border-gray-200">
-            <nav class="flex -mb-px space-x-6" id="tabs">
-                <button class="tab-button active py-4 px-1 text-gray-500 hover:text-blue-600" data-tab="assumptions">Assumptions</button>
-                <button class="tab-button py-4 px-1 text-gray-500 hover:text-blue-600" data-tab="monthly-data">Monthly Data</button>
-                <button class="tab-button py-4 px-1 text-gray-500 hover:text-blue-600" data-tab="summary">Summary</button>
-                <button class="tab-button py-4 px-1 text-gray-500 hover:text-blue-600" data-tab="dashboard">Dashboard</button>
-            </nav>
-        </div>
-
-        <!-- Tab Content -->
-        <div id="tab-content">
-            <!-- Assumptions Tab -->
-            <div id="assumptions" class="tab-pane active">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- General Assumptions -->
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <h3 class="text-lg font-semibold mb-4 border-b pb-2">General Assumptions</h3>
-                        <div class="space-y-3 text-sm">
-                            <p><strong>Projection Start Date:</strong> January 1, 2025</p>
-                            <p><strong>Projection Horizon:</strong> 28 Months</p>
-                            <p><strong>Currency:</strong> Ghana Cedis (GHS)</p>
-                            <p><strong>Monthly Mortality Rate:</strong> 1.00% (compounding)</p>
-                        </div>
-                    </div>
-                    <!-- Flock HB1 -->
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <h3 class="text-lg font-semibold mb-4 border-b pb-2">Flock HB1: Brown Layers</h3>
-                         <div class="space-y-3 text-sm">
-                            <p><strong>Starting Count:</strong> 4,500</p>
-                            <p><strong>Hatch Date:</strong> January 8, 2025</p>
-                            <p><strong>Sale Age:</strong> 104 weeks (~2 years)</p>
-                            <p><strong>Peak Tray Output:</strong> 120 trays/day</p>
-                        </div>
-                    </div>
-                    <!-- Flock HB2 -->
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <h3 class="text-lg font-semibold mb-4 border-b pb-2">Flock HB2: Brown Layers</h3>
-                         <div class="space-y-3 text-sm">
-                            <p><strong>Starting Count:</strong> 3,000</p>
-                            <p><strong>Hatch Date:</strong> April 3, 2025</p>
-                            <p><strong>Sale Age:</strong> 104 weeks (~2 years)</p>
-                            <p><strong>Peak Tray Output:</strong> 80 trays/day</p>
-                        </div>
-                    </div>
-                    <!-- Costs & Pricing -->
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <h3 class="text-lg font-semibold mb-4 border-b pb-2">Costs & Pricing</h3>
-                        <div class="space-y-3 text-sm">
-                            <p><strong>Feed Cost:</strong> GHS 400 / 50kg bag</p>
-                            <p><strong>Small Egg Price (Wk 16-20):</strong> GHS 30 / tray</p>
-                            <p><strong>Standard Egg Price (Wk 21+):</strong> GHS 50 / tray</p>
-                            <p><strong>Labor Cost:</strong> GHS 15,000 / month</p>
-                            <p><strong>Medication/Vet Cost:</strong> GHS 1,000 / month</p>
-                        </div>
-                    </div>
-                    <!-- Editable Financial Inputs -->
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <h3 class="text-lg font-semibold mb-4 border-b pb-2">Financial Inputs (Editable)</h3>
-                        <div class="space-y-4 text-sm">
-                            <div>
-                                <label for="initialInvestment" class="block font-medium">Initial Investment (GHS):</label>
-                                <input type="number" id="initialInvestment" value="800000" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                    <!-- Poultry Farm Financial Projection Tool -->
+                    <div class="tool-card bg-white rounded-xl shadow-lg overflow-hidden">
+                        <div class="p-8">
+                            <div class="flex items-center mb-6">
+                                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
+                                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl font-bold text-gray-900">Financial Projection Tool</h2>
+                                    <p class="text-green-600 font-medium">Future Planning</p>
+                                </div>
                             </div>
-                            <div>
-                                <label for="monthlyDepreciation" class="block font-medium">Monthly Depreciation (GHS):</label>
-                                <input type="number" id="monthlyDepreciation" value="5000" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                            
+                            <div class="space-y-4 mb-8">
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-900">Multi-Flock Modeling</h3>
+                                        <p class="text-sm text-gray-600">Project financials for multiple poultry flocks</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-900">Excel Configuration</h3>
+                                        <p class="text-sm text-gray-600">Upload custom parameters or use defaults</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-900">ROI Analysis</h3>
+                                        <p class="text-sm text-gray-600">Calculate breakeven points and return on investment</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-900">28-Month Projections</h3>
+                                        <p class="text-sm text-gray-600">Long-term financial planning and forecasting</p>
+                                    </div>
+                                </div>
                             </div>
-                             <div>
-                                <label for="docCost" class="block font-medium">Day-Old-Chick Cost (per bird):</label>
-                                <input type="number" id="docCost" value="15" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                            </div>
-                             <div>
-                                <label for="birdSalePrice" class="block font-medium">Spent Layer Sale Price (per bird):</label>
-                                <input type="number" id="birdSalePrice" value="40" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                            </div>
-                             <button id="updateButton" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-300 mt-2">Update Model</button>
-                        </div>
-                    </div>
-                    <!-- Feed Consumption Schedule -->
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <h3 class="text-lg font-semibold mb-4 border-b pb-2">Feed Consumption (g/bird/day)</h3>
-                        <div class="space-y-3 text-sm overflow-y-auto h-40">
-                            <p><strong>Week 1-19:</strong> Based on growth chart</p>
-                            <p><strong>Week 20+:</strong> 93 g (as per instruction)</p>
-                            <ul id="feed-schedule-list" class="list-disc pl-5 text-xs">
-                                <!-- JS will populate this -->
-                            </ul>
+                            
+                            <a href="projections.html" class="block w-full bg-green-600 text-white text-center py-3 px-6 rounded-lg font-semibold hover:bg-green-700 transition duration-300">
+                                Launch Projection Tool
+                            </a>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Monthly Data Tab -->
-            <div id="monthly-data" class="tab-pane hidden">
-                <div class="bg-white p-4 rounded-lg shadow-sm">
-                    <div class="table-responsive">
-                        <table class="min-w-full divide-y divide-gray-200 text-sm">
-                            <thead class="bg-gray-100">
-                                <tr>
-                                    <th class="px-4 py-3 text-left font-semibold text-gray-600">Month</th>
-                                    <th class="px-4 py-3 text-left font-semibold text-gray-600">Date</th>
-                                    <th class="px-4 py-3 text-left font-semibold text-gray-600">HB1 Age (wks)</th>
-                                    <th class="px-4 py-3 text-left font-semibold text-gray-600">HB2 Age (wks)</th>
-                                    <th class="px-4 py-3 text-left font-semibold text-gray-600">HB1 Birds</th>
-                                    <th class="px-4 py-3 text-left font-semibold text-gray-600">HB2 Birds</th>
-                                    <th class="px-4 py-3 text-left font-semibold text-gray-600">Total Revenue</th>
-                                    <th class="px-4 py-3 text-left font-semibold text-gray-600">Feed Cost</th>
-                                    <th class="px-4 py-3 text-left font-semibold text-gray-600">Other Costs</th>
-                                    <th class="px-4 py-3 text-left font-semibold text-gray-600">Total Expenses</th>
-                                    <th class="px-4 py-3 text-left font-semibold text-gray-600">Net Profit</th>
-                                    <th class="px-4 py-3 text-left font-semibold text-gray-600">Cumulative Profit</th>
-                                    <th class="px-4 py-3 text-left font-semibold text-gray-600">ROI</th>
-                                </tr>
-                            </thead>
-                            <tbody id="monthly-data-table" class="bg-white divide-y divide-gray-200">
-                                <!-- JS will populate this -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Summary Tab -->
-            <div id="summary" class="tab-pane hidden">
-                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="bg-white p-6 rounded-lg shadow-sm col-span-1 md:col-span-2 lg:col-span-3">
-                        <h3 class="text-lg font-semibold mb-4 border-b pb-2">Key Performance Indicators</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
-                            <p><strong>Breakeven Month:</strong> <span id="breakeven-month" class="font-semibold"></span></p>
-                            <p><strong>Total Profit (Lifecycle):</strong> <span id="total-profit" class="font-semibold"></span></p>
-                            <p><strong>Final ROI (Lifecycle):</strong> <span id="final-roi" class="font-semibold"></span></p>
+                <!-- Additional Information -->
+                <div class="mt-12 text-center">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-white">
+                        <h3 class="text-lg font-semibold mb-2">Need Help?</h3>
+                        <p class="text-white/80 mb-4">Both tools are designed to help you make informed financial decisions for your poultry business.</p>
+                        <div class="flex flex-wrap justify-center gap-4 text-sm">
+                            <span class="bg-white/20 px-3 py-1 rounded-full">📊 Real-time Analytics</span>
+                            <span class="bg-white/20 px-3 py-1 rounded-full">📈 Financial Projections</span>
+                            <span class="bg-white/20 px-3 py-1 rounded-full">💰 ROI Calculations</span>
+                            <span class="bg-white/20 px-3 py-1 rounded-full">📋 Data Export</span>
                         </div>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <h3 class="text-lg font-semibold mb-4 border-b pb-2">Year 1 (2025) Summary</h3>
-                        <div id="year1-summary" class="space-y-3 text-sm"></div>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <h3 class="text-lg font-semibold mb-4 border-b pb-2">Year 2 (2026) Summary</h3>
-                        <div id="year2-summary" class="space-y-3 text-sm"></div>
-                    </div>
-                     <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <h3 class="text-lg font-semibold mb-4 border-b pb-2">Year 3 (2027) Summary</h3>
-                        <div id="year3-summary" class="space-y-3 text-sm"></div>
-                    </div>
-                 </div>
-            </div>
-
-            <!-- Dashboard Tab -->
-            <div id="dashboard" class="tab-pane hidden">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <h3 class="text-lg font-semibold mb-2">Monthly Financials</h3>
-                        <canvas id="monthlyFinancialsChart"></canvas>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <h3 class="text-lg font-semibold mb-2">Cumulative Profit</h3>
-                        <canvas id="cumulativeProfitChart"></canvas>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-sm lg:col-span-2">
-                        <h3 class="text-lg font-semibold mb-2">Return on Investment (ROI) Over Time</h3>
-                        <canvas id="roiChart"></canvas>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // --- CONFIGURATION & ASSUMPTIONS ---
-            const config = {
-                // Timeline
-                projectionStartDate: new Date('2025-01-01T00:00:00Z'),
-                projectionMonths: 28, // Jan 2025 to Apr 2027
-                daysInMonth: 30.4375,
-
-                // Flocks
-                hb1: {
-                    initialCount: 4500,
-                    hatchDate: new Date('2025-01-08T00:00:00Z'),
-                    peakTrays: 120,
-                    saleAgeWeeks: 104
-                },
-                hb2: {
-                    initialCount: 3000,
-                    hatchDate: new Date('2025-04-03T00:00:00Z'),
-                    peakTrays: 80,
-                    saleAgeWeeks: 104
-                },
-
-                // Financials
-                mortalityRate: 0.01,
-                feedCostPerBag: 400,
-                feedBagKg: 50,
-                laborCost: 15000,
-                medicationCost: 1000,
-                
-                // Egg Pricing by Week
-                eggPrices: {
-                    small: { price: 30, upToWeek: 20 },
-                    standard: { price: 50, fromWeek: 21 }
-                },
-                
-                // Production Phases by Week
-                production: {
-                    preLayEnd: 16,
-                    rampToPeakEnd: 29
-                },
-
-                // Feed Consumption (g/bird/day) by week of age
-                feedConsumptionSchedule: {
-                    1: 11, 2: 17, 3: 22, 4: 28, 5: 35, 6: 41, 7: 47, 8: 51, 9: 55, 10: 58,
-                    11: 60, 12: 64, 13: 65, 14: 68, 15: 70, 16: 71, 17: 72, 18: 75, 19: 81,
-                    default: 93 // For week 20 and above
-                }
-            };
-
-            // --- UI ELEMENTS ---
-            const tabs = document.querySelectorAll('.tab-button');
-            const panes = document.querySelectorAll('.tab-pane');
-            const updateButton = document.getElementById('updateButton');
-            let charts = {}; // To hold chart instances
-
-            // --- HELPER FUNCTIONS ---
-            const formatCurrency = (value) => `GHS ${Math.round(value).toLocaleString()}`;
-            const formatPercent = (value) => `${(value * 100).toFixed(1)}%`;
-            
-            const getFeedConsumption = (week) => {
-                return week > 0 ? (config.feedConsumptionSchedule[week] || config.feedConsumptionSchedule.default) : 0;
-            };
-
-            // --- CORE CALCULATION LOGIC ---
-            function runProjection() {
-                const initialInvestment = parseFloat(document.getElementById('initialInvestment').value) || 0;
-                const monthlyDepreciation = parseFloat(document.getElementById('monthlyDepreciation').value) || 0;
-                const dayOldChickCost = parseFloat(document.getElementById('docCost').value) || 0;
-                const spentLayerSalePrice = parseFloat(document.getElementById('birdSalePrice').value) || 0;
-
-                let monthlyData = [];
-                let cumulativeProfit = 0;
-                let currentBirdCountHB1 = 0;
-                let currentBirdCountHB2 = 0;
-                let hb1Sold = false;
-                let hb2Sold = false;
-
-
-                for (let i = 0; i < config.projectionMonths; i++) {
-                    const monthStartDate = new Date(config.projectionStartDate);
-                    monthStartDate.setUTCMonth(monthStartDate.getUTCMonth() + i);
-                    
-                    const midMonthDate = new Date(monthStartDate);
-                    midMonthDate.setUTCDate(midMonthDate.getUTCDate() + 15);
-                    
-                    let monthlyAdditionalCosts = 0;
-                    
-                    // --- Flock HB1 Logic ---
-                    if (monthStartDate >= new Date(config.hb1.hatchDate.getFullYear(), config.hb1.hatchDate.getMonth(), 1)) {
-                        if (currentBirdCountHB1 === 0) { // First month for this flock
-                            currentBirdCountHB1 = config.hb1.initialCount;
-                            monthlyAdditionalCosts += currentBirdCountHB1 * dayOldChickCost;
-                        } else {
-                            currentBirdCountHB1 *= (1 - config.mortalityRate);
-                        }
-                    }
-                    
-                    // --- Flock HB2 Logic ---
-                     if (monthStartDate >= new Date(config.hb2.hatchDate.getFullYear(), config.hb2.hatchDate.getMonth(), 1)) {
-                        if (currentBirdCountHB2 === 0) { // First month for this flock
-                            currentBirdCountHB2 = config.hb2.initialCount;
-                            monthlyAdditionalCosts += currentBirdCountHB2 * dayOldChickCost;
-                        } else {
-                            currentBirdCountHB2 *= (1 - config.mortalityRate);
-                        }
-                    }
-
-                    const ageInWeeksHB1 = Math.floor((midMonthDate - config.hb1.hatchDate) / (1000 * 60 * 60 * 24 * 7));
-                    const ageInWeeksHB2 = Math.floor((midMonthDate - config.hb2.hatchDate) / (1000 * 60 * 60 * 24 * 7));
-
-                    // 1. Calculate Feed Cost
-                    const feedGramsHB1 = getFeedConsumption(ageInWeeksHB1) * currentBirdCountHB1;
-                    const feedGramsHB2 = getFeedConsumption(ageInWeeksHB2) * currentBirdCountHB2;
-                    const totalFeedKgPerDay = (feedGramsHB1 + feedGramsHB2) / 1000;
-                    const monthlyFeedCost = (totalFeedKgPerDay * config.daysInMonth / config.feedBagKg) * config.feedCostPerBag;
-
-                    // 2. Calculate Revenue (Eggs + Bird Sales)
-                    let totalRevenue = 0;
-                    
-                    // Egg Revenue HB1
-                    if (ageInWeeksHB1 >= config.production.preLayEnd && !hb1Sold) {
-                        const mortalityFactor = currentBirdCountHB1 / config.hb1.initialCount;
-                        let dailyTraysHB1 = 0;
-                        if (ageInWeeksHB1 < config.production.rampToPeakEnd) {
-                            const rampUpFactor = Math.max(0, (ageInWeeksHB1 - config.production.preLayEnd) / (config.production.rampToPeakEnd - config.production.preLayEnd));
-                            dailyTraysHB1 = config.hb1.peakTrays * rampUpFactor * mortalityFactor;
-                        } else {
-                            dailyTraysHB1 = config.hb1.peakTrays * mortalityFactor;
-                        }
-                        const priceHB1 = ageInWeeksHB1 > config.eggPrices.small.upToWeek ? config.eggPrices.standard.price : config.eggPrices.small.price;
-                        totalRevenue += dailyTraysHB1 * priceHB1 * config.daysInMonth;
-                    }
-
-                    // Egg Revenue HB2
-                     if (ageInWeeksHB2 >= config.production.preLayEnd && !hb2Sold) {
-                        const mortalityFactor = currentBirdCountHB2 / config.hb2.initialCount;
-                        let dailyTraysHB2 = 0;
-                        if (ageInWeeksHB2 < config.production.rampToPeakEnd) {
-                             const rampUpFactor = Math.max(0, (ageInWeeksHB2 - config.production.preLayEnd) / (config.production.rampToPeakEnd - config.production.preLayEnd));
-                            dailyTraysHB2 = config.hb2.peakTrays * rampUpFactor * mortalityFactor;
-                        } else {
-                            dailyTraysHB2 = config.hb2.peakTrays * mortalityFactor;
-                        }
-                        const priceHB2 = ageInWeeksHB2 > config.eggPrices.small.upToWeek ? config.eggPrices.standard.price : config.eggPrices.small.price;
-                        totalRevenue += dailyTraysHB2 * priceHB2 * config.daysInMonth;
-                    }
-
-                    // Bird Sale Revenue
-                    if (ageInWeeksHB1 >= config.hb1.saleAgeWeeks && !hb1Sold) {
-                        totalRevenue += currentBirdCountHB1 * spentLayerSalePrice;
-                        hb1Sold = true;
-                    }
-                    if (ageInWeeksHB2 >= config.hb2.saleAgeWeeks && !hb2Sold) {
-                        totalRevenue += currentBirdCountHB2 * spentLayerSalePrice;
-                        hb2Sold = true;
-                    }
-
-
-                    // 3. Financial Summary for the month
-                    const otherCosts = config.laborCost + config.medicationCost + monthlyDepreciation + monthlyAdditionalCosts;
-                    const totalExpenses = monthlyFeedCost + otherCosts;
-                    const netProfit = totalRevenue - totalExpenses;
-                    cumulativeProfit += netProfit;
-                    const roi = initialInvestment > 0 ? cumulativeProfit / initialInvestment : 0;
-
-                    monthlyData.push({
-                        month: i + 1,
-                        date: monthStartDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' }),
-                        ageHB1: ageInWeeksHB1 > 0 ? ageInWeeksHB1 : 'N/A',
-                        ageHB2: ageInWeeksHB2 > 0 ? ageInWeeksHB2 : 'N/A',
-                        birdsHB1: Math.round(currentBirdCountHB1),
-                        birdsHB2: Math.round(currentBirdCountHB2),
-                        totalRevenue: totalRevenue,
-                        feedCost: monthlyFeedCost,
-                        otherCosts: otherCosts,
-                        totalExpenses: totalExpenses,
-                        netProfit: netProfit,
-                        cumulativeProfit: cumulativeProfit,
-                        roi: roi
-                    });
-                }
-                return monthlyData;
-            }
-            
-            // --- RENDER & UPDATE FUNCTIONS ---
-            function populateUI(data) {
-                // Populate Monthly Data Table
-                const tableBody = document.getElementById('monthly-data-table');
-                tableBody.innerHTML = data.map(row => `
-                    <tr>
-                        <td class="px-4 py-3">${row.month}</td>
-                        <td class="px-4 py-3">${row.date}</td>
-                        <td class="px-4 py-3">${row.ageHB1}</td>
-                        <td class="px-4 py-3">${row.ageHB2}</td>
-                        <td class="px-4 py-3">${row.birdsHB1.toLocaleString()}</td>
-                        <td class="px-4 py-3">${row.birdsHB2.toLocaleString()}</td>
-                        <td class="px-4 py-3 text-green-600">${formatCurrency(row.totalRevenue)}</td>
-                        <td class="px-4 py-3 text-red-600">${formatCurrency(row.feedCost)}</td>
-                        <td class="px-4 py-3 text-red-600">${formatCurrency(row.otherCosts)}</td>
-                        <td class="px-4 py-3 text-red-700 font-medium">${formatCurrency(row.totalExpenses)}</td>
-                        <td class="px-4 py-3 ${row.netProfit >= 0 ? 'text-green-700' : 'text-red-700'} font-medium">${formatCurrency(row.netProfit)}</td>
-                        <td class="px-4 py-3 font-medium">${formatCurrency(row.cumulativeProfit)}</td>
-                        <td class="px-4 py-3 font-medium">${formatPercent(row.roi)}</td>
-                    </tr>
-                `).join('');
-
-                // Populate Summary Tab
-                const lastMonth = data[data.length - 1];
-                const breakeven = data.find(row => row.cumulativeProfit > 0);
-                document.getElementById('breakeven-month').textContent = breakeven ? `${breakeven.date} (Month ${breakeven.month})` : 'N/A within projection';
-                document.getElementById('total-profit').textContent = formatCurrency(lastMonth.cumulativeProfit);
-                document.getElementById('final-roi').textContent = formatPercent(lastMonth.roi);
-                
-                const calculateYearSummary = (yearData) => ({
-                    revenue: yearData.reduce((sum, row) => sum + row.totalRevenue, 0),
-                    feedCost: yearData.reduce((sum, row) => sum + row.feedCost, 0),
-                    totalExpenses: yearData.reduce((sum, row) => sum + row.totalExpenses, 0),
-                    netProfit: yearData.reduce((sum, row) => sum + row.netProfit, 0),
-                });
-                
-                const year1Data = data.slice(0, 12);
-                const year2Data = data.slice(12, 24);
-                const year3Data = data.slice(24);
-
-                document.getElementById('year1-summary').innerHTML = `
-                    <p><strong>Total Revenue:</strong> <span class="font-semibold">${formatCurrency(calculateYearSummary(year1Data).revenue)}</span></p>
-                    <p><strong>Total Expenses:</strong> <span class="font-semibold">${formatCurrency(calculateYearSummary(year1Data).totalExpenses)}</span></p>
-                    <p><strong>Net Profit:</strong> <span class="font-semibold">${formatCurrency(calculateYearSummary(year1Data).netProfit)}</span></p>
-                `;
-                 document.getElementById('year2-summary').innerHTML = `
-                    <p><strong>Total Revenue:</strong> <span class="font-semibold">${formatCurrency(calculateYearSummary(year2Data).revenue)}</span></p>
-                    <p><strong>Total Expenses:</strong> <span class="font-semibold">${formatCurrency(calculateYearSummary(year2Data).totalExpenses)}</span></p>
-                    <p><strong>Net Profit:</strong> <span class="font-semibold">${formatCurrency(calculateYearSummary(year2Data).netProfit)}</span></p>
-                `;
-                 document.getElementById('year3-summary').innerHTML = `
-                    <p><strong>Total Revenue:</strong> <span class="font-semibold">${formatCurrency(calculateYearSummary(year3Data).revenue)}</span></p>
-                    <p><strong>Total Expenses:</strong> <span class="font-semibold">${formatCurrency(calculateYearSummary(year3Data).totalExpenses)}</span></p>
-                    <p><strong>Net Profit:</strong> <span class="font-semibold">${formatCurrency(calculateYearSummary(year3Data).netProfit)}</span></p>
-                `;
-                
-                // Populate Feed Schedule List
-                const feedList = document.getElementById('feed-schedule-list');
-                feedList.innerHTML = Object.entries(config.feedConsumptionSchedule)
-                    .filter(([key]) => key !== 'default')
-                    .map(([week, grams]) => `<li>Week ${week}: ${grams}g</li>`)
-                    .join('');
-
-                // Update Charts
-                updateCharts(data);
-            }
-
-            function updateCharts(data) {
-                const labels = data.map(row => row.date);
-                
-                Object.values(charts).forEach(chart => chart.destroy());
-
-                charts.monthly = new Chart(document.getElementById('monthlyFinancialsChart'), {
-                    type: 'bar',
-                    data: {
-                        labels,
-                        datasets: [
-                            { label: 'Total Revenue', data: data.map(r => r.totalRevenue), backgroundColor: 'rgba(34, 197, 94, 0.7)' },
-                            { label: 'Total Expenses', data: data.map(r => r.totalExpenses), backgroundColor: 'rgba(239, 68, 68, 0.7)' },
-                            { label: 'Net Profit', data: data.map(r => r.netProfit), type: 'line', borderColor: '#1d4ed8', fill: false, tension: 0.1 }
-                        ]
-                    },
-                    options: { responsive: true, scales: { y: { beginAtZero: false } } }
-                });
-
-                charts.cumulative = new Chart(document.getElementById('cumulativeProfitChart'), {
-                    type: 'line',
-                    data: {
-                        labels,
-                        datasets: [{ label: 'Cumulative Profit', data: data.map(r => r.cumulativeProfit), borderColor: '#16a34a', backgroundColor: 'rgba(22, 163, 74, 0.1)', fill: true, tension: 0.1 }]
-                    },
-                    options: { responsive: true }
-                });
-
-                charts.roi = new Chart(document.getElementById('roiChart'), {
-                    type: 'line',
-                    data: {
-                        labels,
-                        datasets: [{ label: 'ROI', data: data.map(r => r.roi * 100), borderColor: '#c026d3', backgroundColor: 'rgba(192, 38, 211, 0.1)', fill: true, tension: 0.1 }]
-                    },
-                    options: { responsive: true, scales: { y: { ticks: { callback: value => `${value}%` } } } }
-                });
-            }
-
-            // --- EVENT LISTENERS ---
-            tabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    tabs.forEach(t => t.classList.remove('active'));
-                    tab.classList.add('active');
-                    panes.forEach(pane => pane.classList.add('hidden'));
-                    document.getElementById(tab.dataset.tab).classList.remove('hidden');
-                });
-            });
-
-            updateButton.addEventListener('click', () => {
-                const data = runProjection();
-                populateUI(data);
-            });
-
-            // --- INITIALIZATION ---
-            const initialData = runProjection();
-            populateUI(initialData);
-        });
-    </script>
+    
+    <!-- Authentication Script -->
+    <script src="js/auth.js"></script>
 </body>
 </html>
