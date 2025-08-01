@@ -59,20 +59,25 @@ class FileUpload {
     }
 
     /**
-     * Process data when both files are loaded
+     * Process uploaded data
      */
     processData() {
-        console.log('Processing data...');
-        console.log('Sales data length:', this.salesData.length);
-        console.log('Transactions data length:', this.transactionsData.length);
-        console.log('Sample sales data:', this.salesData.slice(0, 3));
-        console.log('Sample transactions data:', this.transactionsData.slice(0, 3));
+        if (!this.salesData.length || !this.transactionsData.length) {
+            return;
+        }
 
         // Show all sections
         document.getElementById('summary').classList.remove('hidden');
         document.getElementById('filters').classList.remove('hidden');
         document.getElementById('charts').classList.remove('hidden');
         document.getElementById('data-section').classList.remove('hidden');
+
+        // Initialize table controls after data section is visible
+        if (window.tableManager) {
+            console.log('Initializing table controls after data section becomes visible...');
+            window.tableManager.setupTableControls();
+            window.tableManager.setupTabSwitching();
+        }
 
         // Calculate previous period data
         this.dataProcessor.calculatePreviousPeriodData();
