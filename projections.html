@@ -3,33 +3,714 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financial Projection Tool - Goldcoast Farms</title>
+    <title>Goldcoast Farms Financial Projection (Enhanced)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .tab-button.active {
+            border-bottom-color: #2563eb;
+            color: #2563eb;
+            font-weight: 600;
+        }
+        .tab-button {
+            border-bottom: 2px solid transparent;
+        }
+        .table-responsive {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        th, td {
+            white-space: nowrap;
+        }
+        .file-upload-area {
+            border: 2px dashed #d1d5db;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .file-upload-area:hover {
+            border-color: #2563eb;
+            background-color: #f8fafc;
+        }
+        .file-upload-area.dragover {
+            border-color: #2563eb;
+            background-color: #eff6ff;
+        }
+    </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
+
     <div class="container mx-auto p-4 md:p-8">
         <header class="text-center mb-8">
-            <h1 class="text-4xl font-bold text-gray-900">Financial Projection Tool</h1>
-            <p class="text-lg text-gray-600 mt-2">Goldcoast Farms - Future Planning & ROI Analysis</p>
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900">Goldcoast Farms Financial Projection (Enhanced)</h1>
+            <p class="text-md text-gray-600 mt-2">Upload your configuration files to customize the model</p>
         </header>
 
-        <div class="bg-white p-8 rounded-lg shadow-md text-center">
-            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-                </svg>
+        <!-- Configuration Upload Section -->
+        <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+            <h3 class="text-lg font-semibold mb-4">Configuration Files</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Upload Excel Configuration File</label>
+                    <div class="file-upload-area" id="excel-upload">
+                        <input type="file" id="excel-file" accept=".xlsx,.xls" class="hidden">
+                        <div class="text-gray-500">
+                            <svg class="mx-auto h-12 w-12 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                            </svg>
+                            <p>Drop Excel file here or click to browse</p>
+                            <p class="text-xs mt-2">Supports .xlsx and .xls files</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Or Use Default Configuration</label>
+                    <button id="load-default" class="w-full bg-green-600 text-white py-3 px-4 rounded-lg hover:bg-green-700 transition duration-300">
+                        Load Default Configuration
+                    </button>
+                    <p class="text-xs text-gray-500 mt-2">Uses the original HB1 and HB2 flocks</p>
+                </div>
             </div>
-            <h2 class="text-2xl font-semibold mb-4">Projection Tool Coming Soon</h2>
-            <p class="text-gray-600 mb-6">This tool will provide comprehensive financial projections for your poultry farming operations.</p>
-            <a href="index.html" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">
-                Back to Dashboard
-            </a>
+        </div>
+
+        <!-- Tabs Navigation -->
+        <div class="mb-6 border-b border-gray-200">
+            <nav class="flex -mb-px space-x-6" id="tabs">
+                <button class="tab-button active py-4 px-1 text-gray-500 hover:text-blue-600" data-tab="assumptions">Assumptions</button>
+                <button class="tab-button py-4 px-1 text-gray-500 hover:text-blue-600" data-tab="monthly-data">Monthly Data</button>
+                <button class="tab-button py-4 px-1 text-gray-500 hover:text-blue-600" data-tab="summary">Summary</button>
+                <button class="tab-button py-4 px-1 text-gray-500 hover:text-blue-600" data-tab="dashboard">Dashboard</button>
+            </nav>
+        </div>
+
+        <!-- Tab Content -->
+        <div id="tab-content">
+            <!-- Assumptions Tab -->
+            <div id="assumptions" class="tab-pane active">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="assumptions-content">
+                    <!-- Dynamic content will be populated here -->
+                </div>
+            </div>
+
+            <!-- Monthly Data Tab -->
+            <div id="monthly-data" class="tab-pane hidden">
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <div class="table-responsive">
+                        <table class="min-w-full divide-y divide-gray-200 text-sm">
+                            <thead class="bg-gray-100">
+                                <tr id="monthly-table-header">
+                                    <!-- Dynamic headers will be populated here -->
+                                </tr>
+                            </thead>
+                            <tbody id="monthly-data-table" class="bg-white divide-y divide-gray-200">
+                                <!-- Dynamic data will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary Tab -->
+            <div id="summary" class="tab-pane hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-sm col-span-1 md:col-span-2 lg:col-span-3">
+                        <h3 class="text-lg font-semibold mb-4 border-b pb-2">Key Performance Indicators</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
+                            <p><strong>Breakeven Month:</strong> <span id="breakeven-month" class="font-semibold"></span></p>
+                            <p><strong>Total Profit (Lifecycle):</strong> <span id="total-profit" class="font-semibold"></span></p>
+                            <p><strong>Final ROI (Lifecycle):</strong> <span id="final-roi" class="font-semibold"></span></p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h3 class="text-lg font-semibold mb-4 border-b pb-2">Year 1 (2025) Summary</h3>
+                        <div id="year1-summary" class="space-y-3 text-sm"></div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h3 class="text-lg font-semibold mb-4 border-b pb-2">Year 2 (2026) Summary</h3>
+                        <div id="year2-summary" class="space-y-3 text-sm"></div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h3 class="text-lg font-semibold mb-4 border-b pb-2">Year 3 (2027) Summary</h3>
+                        <div id="year3-summary" class="space-y-3 text-sm"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="tab-pane hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h3 class="text-lg font-semibold mb-2">Monthly Financials</h3>
+                        <canvas id="monthlyFinancialsChart"></canvas>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h3 class="text-lg font-semibold mb-2">Cumulative Profit</h3>
+                        <canvas id="cumulativeProfitChart"></canvas>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm lg:col-span-2">
+                        <h3 class="text-lg font-semibold mb-2">Return on Investment (ROI) Over Time</h3>
+                        <canvas id="roiChart"></canvas>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- GLOBAL VARIABLES ---
+            let config = {};
+            let flocks = [];
+            let charts = {};
+            let currentData = [];
+
+            // --- DEFAULT CONFIGURATION ---
+            const defaultConfig = {
+                projectionStartDate: new Date('2025-01-01T00:00:00Z'),
+                projectionMonths: 28,
+                daysInMonth: 30.4375,
+                mortalityRate: 0.01,
+                feedCostPerBag: 400,
+                feedBagKg: 50,
+                laborCost: 15000,
+                medicationCost: 1000,
+                eggPrices: {
+                    small: { price: 30, upToWeek: 20 },
+                    standard: { price: 50, fromWeek: 21 }
+                },
+                production: {
+                    preLayEnd: 16,
+                    rampToPeakEnd: 29
+                },
+                feedConsumptionSchedule: {
+                    1: 11, 2: 17, 3: 22, 4: 28, 5: 35, 6: 41, 7: 47, 8: 51, 9: 55, 10: 58,
+                    11: 60, 12: 64, 13: 65, 14: 68, 15: 70, 16: 71, 17: 72, 18: 75, 19: 81,
+                    default: 93
+                }
+            };
+
+            const defaultFlocks = [
+                {
+                    id: 'HB1',
+                    name: 'Brown Layers 1',
+                    initialCount: 4500,
+                    hatchDate: new Date('2025-01-08T00:00:00Z'),
+                    peakTrays: 120,
+                    saleAgeWeeks: 104
+                },
+                {
+                    id: 'HB2',
+                    name: 'Brown Layers 2',
+                    initialCount: 3000,
+                    hatchDate: new Date('2025-04-03T00:00:00Z'),
+                    peakTrays: 80,
+                    saleAgeWeeks: 104
+                }
+            ];
+
+            // --- FILE UPLOAD HANDLING ---
+            const excelUpload = document.getElementById('excel-upload');
+            const excelFile = document.getElementById('excel-file');
+            const loadDefaultBtn = document.getElementById('load-default');
+
+            // Drag and drop functionality
+            excelUpload.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                excelUpload.classList.add('dragover');
+            });
+
+            excelUpload.addEventListener('dragleave', () => {
+                excelUpload.classList.remove('dragover');
+            });
+
+            excelUpload.addEventListener('drop', (e) => {
+                e.preventDefault();
+                excelUpload.classList.remove('dragover');
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    handleExcelFile(files[0]);
+                }
+            });
+
+            excelUpload.addEventListener('click', () => {
+                excelFile.click();
+            });
+
+            excelFile.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    handleExcelFile(e.target.files[0]);
+                }
+            });
+
+            loadDefaultBtn.addEventListener('click', () => {
+                loadDefaultConfiguration();
+            });
+
+            function handleExcelFile(file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        const fileData = new Uint8Array(e.target.result);
+                        const workbook = XLSX.read(fileData, { type: 'array' });
+                        
+                        // Parse configuration from Excel sheets
+                        const flocks = parseFlockConfiguration(workbook);
+                        const financialParams = parseFinancialParameters(workbook);
+                        const eggPricing = parseEggPricing(workbook);
+                        const feedConsumption = parseFeedConsumption(workbook);
+                        
+                        // Update configuration
+                        updateConfiguration(flocks, financialParams, eggPricing, feedConsumption);
+                        
+                        // Run projection and update UI
+                        const projectionData = runProjection();
+                        populateUI(projectionData);
+                        
+                        alert('Configuration loaded successfully!');
+                    } catch (error) {
+                        console.error('Error parsing Excel file:', error);
+                        alert('Error loading Excel file. Please check the format.');
+                    }
+                };
+                reader.readAsArrayBuffer(file);
+            }
+
+            function parseFlockConfiguration(workbook) {
+                const sheet = workbook.Sheets['Flock_Configuration'];
+                if (!sheet) return defaultFlocks;
+                
+                const data = XLSX.utils.sheet_to_json(sheet);
+                return data.map(row => ({
+                    id: row.Flock_ID,
+                    name: row.Flock_Name,
+                    initialCount: parseInt(row.Initial_Count),
+                    hatchDate: new Date(row.Hatch_Date),
+                    peakTrays: parseInt(row.Peak_Trays),
+                    saleAgeWeeks: parseInt(row.Sale_Age_Weeks)
+                }));
+            }
+
+            function parseFinancialParameters(workbook) {
+                const sheet = workbook.Sheets['Financial_Parameters'];
+                if (!sheet) return {};
+                
+                const data = XLSX.utils.sheet_to_json(sheet);
+                const params = {};
+                data.forEach(row => {
+                    params[row.Parameter] = parseFloat(row.Value);
+                });
+                return params;
+            }
+
+            function parseEggPricing(workbook) {
+                const sheet = workbook.Sheets['Egg_Pricing'];
+                if (!sheet) return defaultConfig.eggPrices;
+                
+                const data = XLSX.utils.sheet_to_json(sheet);
+                return data.map(row => ({
+                    weekStart: parseInt(row.Week_Start),
+                    weekEnd: parseInt(row.Week_End),
+                    price: parseFloat(row.Price_Per_Tray),
+                    size: row.Egg_Size
+                }));
+            }
+
+            function parseFeedConsumption(workbook) {
+                const sheet = workbook.Sheets['Feed_Consumption'];
+                if (!sheet) return defaultConfig.feedConsumptionSchedule;
+                
+                const data = XLSX.utils.sheet_to_json(sheet);
+                const schedule = {};
+                data.forEach(row => {
+                    schedule[parseInt(row.Week)] = parseFloat(row.Grams_Per_Bird_Per_Day);
+                });
+                return schedule;
+            }
+
+            function updateConfiguration(newFlocks, financialParams, eggPricing, feedConsumption) {
+                flocks = newFlocks;
+                config = { ...defaultConfig };
+                
+                // Update financial parameters
+                Object.keys(financialParams).forEach(key => {
+                    switch(key) {
+                        case 'Initial_Investment':
+                            config.initialInvestment = financialParams[key];
+                            break;
+                        case 'Monthly_Depreciation':
+                            config.monthlyDepreciation = financialParams[key];
+                            break;
+                        case 'Day_Old_Chick_Cost':
+                            config.dayOldChickCost = financialParams[key];
+                            break;
+                        case 'Spent_Layer_Sale_Price':
+                            config.spentLayerSalePrice = financialParams[key];
+                            break;
+                        case 'Feed_Cost_Per_Bag':
+                            config.feedCostPerBag = financialParams[key];
+                            break;
+                        case 'Labor_Cost':
+                            config.laborCost = financialParams[key];
+                            break;
+                        case 'Medication_Cost':
+                            config.medicationCost = financialParams[key];
+                            break;
+                        case 'Mortality_Rate':
+                            config.mortalityRate = financialParams[key];
+                            break;
+                    }
+                });
+                
+                // Update egg pricing
+                if (eggPricing.length > 0) {
+                    config.eggPricing = eggPricing;
+                }
+                
+                // Update feed consumption
+                if (Object.keys(feedConsumption).length > 0) {
+                    config.feedConsumptionSchedule = feedConsumption;
+                }
+            }
+
+            function loadDefaultConfiguration() {
+                flocks = defaultFlocks;
+                config = { ...defaultConfig };
+                const data = runProjection();
+                populateUI(data);
+            }
+
+            // --- CORE CALCULATION LOGIC (Enhanced for multiple flocks) ---
+            function runProjection() {
+                let monthlyData = [];
+                let cumulativeProfit = 0;
+                let flockStates = {};
+                
+                // Initialize flock states
+                flocks.forEach(flock => {
+                    flockStates[flock.id] = {
+                        currentCount: 0,
+                        sold: false
+                    };
+                });
+
+                for (let i = 0; i < config.projectionMonths; i++) {
+                    const monthStartDate = new Date(config.projectionStartDate);
+                    monthStartDate.setUTCMonth(monthStartDate.getUTCMonth() + i);
+                    
+                    const midMonthDate = new Date(monthStartDate);
+                    midMonthDate.setUTCDate(midMonthDate.getUTCDate() + 15);
+                    
+                    let monthlyAdditionalCosts = 0;
+                    let totalRevenue = 0;
+                    let totalFeedCost = 0;
+                    
+                    // Process each flock
+                    flocks.forEach(flock => {
+                        const state = flockStates[flock.id];
+                        
+                        // Initialize flock if it's their first month
+                        if (monthStartDate >= new Date(flock.hatchDate.getFullYear(), flock.hatchDate.getMonth(), 1)) {
+                            if (state.currentCount === 0) {
+                                state.currentCount = flock.initialCount;
+                                monthlyAdditionalCosts += state.currentCount * (config.dayOldChickCost || 15);
+                            } else {
+                                state.currentCount *= (1 - config.mortalityRate);
+                            }
+                        }
+                        
+                        // Calculate age and production
+                        const ageInWeeks = Math.floor((midMonthDate - flock.hatchDate) / (1000 * 60 * 60 * 24 * 7));
+                        
+                        // Feed cost calculation
+                        const feedConsumption = getFeedConsumption(ageInWeeks);
+                        const flockFeedGrams = feedConsumption * state.currentCount;
+                        const flockFeedCost = (flockFeedGrams / 1000 * config.daysInMonth / config.feedBagKg) * config.feedCostPerBag;
+                        totalFeedCost += flockFeedCost;
+                        
+                        // Revenue calculation
+                        if (ageInWeeks >= config.production.preLayEnd && !state.sold) {
+                            const mortalityFactor = state.currentCount / flock.initialCount;
+                            let dailyTrays = 0;
+                            
+                            if (ageInWeeks < config.production.rampToPeakEnd) {
+                                const rampUpFactor = Math.max(0, (ageInWeeks - config.production.preLayEnd) / (config.production.rampToPeakEnd - config.production.preLayEnd));
+                                dailyTrays = flock.peakTrays * rampUpFactor * mortalityFactor;
+                            } else {
+                                dailyTrays = flock.peakTrays * mortalityFactor;
+                            }
+                            
+                            const price = getEggPrice(ageInWeeks);
+                            totalRevenue += dailyTrays * price * config.daysInMonth;
+                        }
+                        
+                        // Bird sale revenue
+                        if (ageInWeeks >= flock.saleAgeWeeks && !state.sold) {
+                            totalRevenue += state.currentCount * (config.spentLayerSalePrice || 40);
+                            state.sold = true;
+                        }
+                    });
+                    
+                    // Financial summary
+                    const otherCosts = config.laborCost + config.medicationCost + (config.monthlyDepreciation || 0) + monthlyAdditionalCosts;
+                    const totalExpenses = totalFeedCost + otherCosts;
+                    const netProfit = totalRevenue - totalExpenses;
+                    cumulativeProfit += netProfit;
+                    const roi = (config.initialInvestment || 800000) > 0 ? cumulativeProfit / (config.initialInvestment || 800000) : 0;
+                    
+                    // Create row data
+                    const rowData = {
+                        month: i + 1,
+                        date: monthStartDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' }),
+                        totalRevenue: totalRevenue,
+                        feedCost: totalFeedCost,
+                        otherCosts: otherCosts,
+                        totalExpenses: totalExpenses,
+                        netProfit: netProfit,
+                        cumulativeProfit: cumulativeProfit,
+                        roi: roi
+                    };
+                    
+                    // Add flock-specific data
+                    flocks.forEach(flock => {
+                        const state = flockStates[flock.id];
+                        const ageInWeeks = Math.floor((midMonthDate - flock.hatchDate) / (1000 * 60 * 60 * 24 * 7));
+                        rowData[`age_${flock.id}`] = ageInWeeks > 0 ? ageInWeeks : 'N/A';
+                        rowData[`birds_${flock.id}`] = Math.round(state.currentCount);
+                    });
+                    
+                    monthlyData.push(rowData);
+                }
+                
+                currentData = monthlyData;
+                return monthlyData;
+            }
+
+            function getFeedConsumption(week) {
+                return week > 0 ? (config.feedConsumptionSchedule[week] || config.feedConsumptionSchedule.default) : 0;
+            }
+
+            function getEggPrice(week) {
+                if (config.eggPricing && Array.isArray(config.eggPricing)) {
+                    const pricing = config.eggPricing.find(p => week >= p.weekStart && week <= p.weekEnd);
+                    return pricing ? pricing.price : config.eggPrices.standard.price;
+                }
+                return week > config.eggPrices.small.upToWeek ? config.eggPrices.standard.price : config.eggPrices.small.price;
+            }
+
+            // --- UI FUNCTIONS ---
+            function populateUI(data) {
+                populateAssumptionsTab();
+                populateMonthlyDataTable(data);
+                populateSummaryTab(data);
+                updateCharts(data);
+            }
+
+            function populateAssumptionsTab() {
+                const container = document.getElementById('assumptions-content');
+                
+                let html = `
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h3 class="text-lg font-semibold mb-4 border-b pb-2">General Assumptions</h3>
+                        <div class="space-y-3 text-sm">
+                            <p><strong>Projection Start Date:</strong> ${config.projectionStartDate.toLocaleDateString()}</p>
+                            <p><strong>Projection Horizon:</strong> ${config.projectionMonths} Months</p>
+                            <p><strong>Currency:</strong> Ghana Cedis (GHS)</p>
+                            <p><strong>Monthly Mortality Rate:</strong> ${(config.mortalityRate * 100).toFixed(2)}%</p>
+                        </div>
+                    </div>
+                `;
+                
+                // Add flock cards
+                flocks.forEach(flock => {
+                    html += `
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <h3 class="text-lg font-semibold mb-4 border-b pb-2">${flock.name} (${flock.id})</h3>
+                            <div class="space-y-3 text-sm">
+                                <p><strong>Starting Count:</strong> ${flock.initialCount.toLocaleString()}</p>
+                                <p><strong>Hatch Date:</strong> ${flock.hatchDate.toLocaleDateString()}</p>
+                                <p><strong>Sale Age:</strong> ${flock.saleAgeWeeks} weeks (~${Math.round(flock.saleAgeWeeks/52)} years)</p>
+                                <p><strong>Peak Tray Output:</strong> ${flock.peakTrays} trays/day</p>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                html += `
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h3 class="text-lg font-semibold mb-4 border-b pb-2">Costs & Pricing</h3>
+                        <div class="space-y-3 text-sm">
+                            <p><strong>Feed Cost:</strong> GHS ${config.feedCostPerBag} / ${config.feedBagKg}kg bag</p>
+                            <p><strong>Labor Cost:</strong> GHS ${config.laborCost.toLocaleString()} / month</p>
+                            <p><strong>Medication/Vet Cost:</strong> GHS ${config.medicationCost.toLocaleString()} / month</p>
+                            <p><strong>Monthly Depreciation:</strong> GHS ${(config.monthlyDepreciation || 0).toLocaleString()} / month</p>
+                        </div>
+                    </div>
+                `;
+                
+                container.innerHTML = html;
+            }
+
+            function populateMonthlyDataTable(data) {
+                const tableHeader = document.getElementById('monthly-table-header');
+                const tableBody = document.getElementById('monthly-data-table');
+                
+                // Generate headers
+                let headerHtml = `
+                    <th class="px-4 py-3 text-left font-semibold text-gray-600">Month</th>
+                    <th class="px-4 py-3 text-left font-semibold text-gray-600">Date</th>
+                `;
+                
+                flocks.forEach(flock => {
+                    headerHtml += `
+                        <th class="px-4 py-3 text-left font-semibold text-gray-600">${flock.id} Age (wks)</th>
+                        <th class="px-4 py-3 text-left font-semibold text-gray-600">${flock.id} Birds</th>
+                    `;
+                });
+                
+                headerHtml += `
+                    <th class="px-4 py-3 text-left font-semibold text-gray-600">Total Revenue</th>
+                    <th class="px-4 py-3 text-left font-semibold text-gray-600">Feed Cost</th>
+                    <th class="px-4 py-3 text-left font-semibold text-gray-600">Other Costs</th>
+                    <th class="px-4 py-3 text-left font-semibold text-gray-600">Total Expenses</th>
+                    <th class="px-4 py-3 text-left font-semibold text-gray-600">Net Profit</th>
+                    <th class="px-4 py-3 text-left font-semibold text-gray-600">Cumulative Profit</th>
+                    <th class="px-4 py-3 text-left font-semibold text-gray-600">ROI</th>
+                `;
+                
+                tableHeader.innerHTML = headerHtml;
+                
+                // Generate rows
+                const rowsHtml = data.map(row => {
+                    let rowHtml = `
+                        <td class="px-4 py-3">${row.month}</td>
+                        <td class="px-4 py-3">${row.date}</td>
+                    `;
+                    
+                    flocks.forEach(flock => {
+                        rowHtml += `
+                            <td class="px-4 py-3">${row[`age_${flock.id}`]}</td>
+                            <td class="px-4 py-3">${row[`birds_${flock.id}`].toLocaleString()}</td>
+                        `;
+                    });
+                    
+                    rowHtml += `
+                        <td class="px-4 py-3 text-green-600">${formatCurrency(row.totalRevenue)}</td>
+                        <td class="px-4 py-3 text-red-600">${formatCurrency(row.feedCost)}</td>
+                        <td class="px-4 py-3 text-red-600">${formatCurrency(row.otherCosts)}</td>
+                        <td class="px-4 py-3 text-red-700 font-medium">${formatCurrency(row.totalExpenses)}</td>
+                        <td class="px-4 py-3 ${row.netProfit >= 0 ? 'text-green-700' : 'text-red-700'} font-medium">${formatCurrency(row.netProfit)}</td>
+                        <td class="px-4 py-3 font-medium">${formatCurrency(row.cumulativeProfit)}</td>
+                        <td class="px-4 py-3 font-medium">${formatPercent(row.roi)}</td>
+                    `;
+                    
+                    return `<tr>${rowHtml}</tr>`;
+                }).join('');
+                
+                tableBody.innerHTML = rowsHtml;
+            }
+
+            function populateSummaryTab(data) {
+                const lastMonth = data[data.length - 1];
+                const breakeven = data.find(row => row.cumulativeProfit > 0);
+                
+                document.getElementById('breakeven-month').textContent = breakeven ? `${breakeven.date} (Month ${breakeven.month})` : 'N/A within projection';
+                document.getElementById('total-profit').textContent = formatCurrency(lastMonth.cumulativeProfit);
+                document.getElementById('final-roi').textContent = formatPercent(lastMonth.roi);
+                
+                // Year summaries
+                const year1Data = data.slice(0, 12);
+                const year2Data = data.slice(12, 24);
+                const year3Data = data.slice(24);
+                
+                document.getElementById('year1-summary').innerHTML = generateYearSummary(year1Data);
+                document.getElementById('year2-summary').innerHTML = generateYearSummary(year2Data);
+                document.getElementById('year3-summary').innerHTML = generateYearSummary(year3Data);
+            }
+
+            function generateYearSummary(yearData) {
+                if (yearData.length === 0) return '<p class="text-gray-500">No data for this year</p>';
+                
+                const summary = {
+                    revenue: yearData.reduce((sum, row) => sum + row.totalRevenue, 0),
+                    totalExpenses: yearData.reduce((sum, row) => sum + row.totalExpenses, 0),
+                    netProfit: yearData.reduce((sum, row) => sum + row.netProfit, 0),
+                };
+                
+                return `
+                    <p><strong>Total Revenue:</strong> <span class="font-semibold">${formatCurrency(summary.revenue)}</span></p>
+                    <p><strong>Total Expenses:</strong> <span class="font-semibold">${formatCurrency(summary.totalExpenses)}</span></p>
+                    <p><strong>Net Profit:</strong> <span class="font-semibold">${formatCurrency(summary.netProfit)}</span></p>
+                `;
+            }
+
+            function updateCharts(data) {
+                const labels = data.map(row => row.date);
+                
+                Object.values(charts).forEach(chart => chart.destroy());
+
+                charts.monthly = new Chart(document.getElementById('monthlyFinancialsChart'), {
+                    type: 'bar',
+                    data: {
+                        labels,
+                        datasets: [
+                            { label: 'Total Revenue', data: data.map(r => r.totalRevenue), backgroundColor: 'rgba(34, 197, 94, 0.7)' },
+                            { label: 'Total Expenses', data: data.map(r => r.totalExpenses), backgroundColor: 'rgba(239, 68, 68, 0.7)' },
+                            { label: 'Net Profit', data: data.map(r => r.netProfit), type: 'line', borderColor: '#1d4ed8', fill: false, tension: 0.1 }
+                        ]
+                    },
+                    options: { responsive: true, scales: { y: { beginAtZero: false } } }
+                });
+
+                charts.cumulative = new Chart(document.getElementById('cumulativeProfitChart'), {
+                    type: 'line',
+                    data: {
+                        labels,
+                        datasets: [{ label: 'Cumulative Profit', data: data.map(r => r.cumulativeProfit), borderColor: '#16a34a', backgroundColor: 'rgba(22, 163, 74, 0.1)', fill: true, tension: 0.1 }]
+                    },
+                    options: { responsive: true }
+                });
+
+                charts.roi = new Chart(document.getElementById('roiChart'), {
+                    type: 'line',
+                    data: {
+                        labels,
+                        datasets: [{ label: 'ROI', data: data.map(r => r.roi * 100), borderColor: '#c026d3', backgroundColor: 'rgba(192, 38, 211, 0.1)', fill: true, tension: 0.1 }]
+                    },
+                    options: { responsive: true, scales: { y: { ticks: { callback: value => `${value}%` } } } }
+                });
+            }
+
+            // --- HELPER FUNCTIONS ---
+            const formatCurrency = (value) => `GHS ${Math.round(value).toLocaleString()}`;
+            const formatPercent = (value) => `${(value * 100).toFixed(1)}%`;
+
+            // --- TAB NAVIGATION ---
+            const tabs = document.querySelectorAll('.tab-button');
+            const panes = document.querySelectorAll('.tab-pane');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    panes.forEach(pane => pane.classList.add('hidden'));
+                    document.getElementById(tab.dataset.tab).classList.remove('hidden');
+                });
+            });
+
+            // --- INITIALIZATION ---
+            loadDefaultConfiguration();
+        });
+    </script>
     
     <!-- Authentication Script -->
     <script src="js/auth.js"></script>
 </body>
-</html> 
+</html>
